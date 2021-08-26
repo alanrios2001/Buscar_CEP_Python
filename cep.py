@@ -2,10 +2,12 @@ import requests
 import json
 import os
 
+
 def get_info_cep(api):
     cep = requests.get(api)
     dict_cep = json.loads(cep.text)
     return dict_cep
+
 
 def show_info_cep(dicionario,cep):
     print('-'*10,f'cep: {cep}','-'*10)
@@ -14,19 +16,20 @@ def show_info_cep(dicionario,cep):
     print('estado:', dicionario['state'])
     print('cidade: ', dicionario['city'])
     print('ddd:', dicionario['ddd'])
+    
 
 def pedir_cep():
     lista_url = list('https://cep.awesomeapi.com.br/json/')
     while True:
         cep = input('digite o cep que deseja buscar: ')
         if len(cep) == 8:
-            for numero in cep:
-                lista_url.append(numero)
+            lista_url.append(cep)
             break
         else:
             print('cep invalido')
     url = ''.join(lista_url)
     return url,cep
+
 
 def cep_main():
     i = 1
